@@ -1,0 +1,23 @@
+
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<h1> Shipment on <%= @today %></h1>
+
+<table class= "table table-bordered" style="width:100%;">
+  <tr>
+<td>No</td>
+    <td>Transporter</td>
+    <td>Routes</td>
+  </tr>
+  <tr>
+    <% @order.each_with_index do |x, y| %>
+  <td><%= y+1%></td>
+    <td><%= x.transporter%> </td>
+    <td><%= x.remarks%></td>
+  </tr>
+  <%end%>
+
+</table>
+</div>
+
+
+

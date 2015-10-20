@@ -1,0 +1,314 @@
+ <!-- source for changing color at menu  -->
+<link rel='stylesheet' href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+<style>
+ul {
+  list-style-type: none;
+}
+ul li {
+  margin-bottom: 10px;
+}
+.btn-custom {
+  background-color: transparent;
+  box-shadow: 3px 3px 3px 3px #888888;
+}
+.action-button li button.active {
+  background-color: grey; color:white;
+}
+</style>
+
+<script>
+$(document).on('ready page:load', function(){
+  $('.action-button button').click(function() {
+    $('.action-button button.active').removeClass('active');
+    $(this).addClass('active');
+  })
+});
+</script>
+
+<div class="row">
+  <div class="col-md-2 col-md-offset-2">
+    <br><br><br><br>
+    <br>
+    <br><br>
+    <ul class="action-button">
+
+    <li><a href="#order" aria-controls="order" role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Order</button></a></li>
+    <br>
+    <li><a href="#personal_info" aria-controls="personal_info" role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Pick Up info</button></a></li>
+    <br>
+    <li><a href="#employment_info" aria-controls="employment_info"role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Drop Point</button></a></li>
+    <br>
+    <li><a href="#others_info" aria-controls="others_info" role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Driver</button></a></li>
+    <br>
+    <li><a href="#system_info" aria-controls="system_info" role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Delivery Flow</button></a></li>
+    <br>
+  
+    <li><a href="#payment_info" aria-controls="system_info" role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Payment info</button></a></li>
+    <br>
+    <li><a href="#billing_info" aria-controls="system_info" role="tab" data-toggle="tab"><button type="button" class="btn btn-custom btn-block">Billing info</button></a></li>
+    </ul>
+
+  </div>
+<%= form_for :order, url: order_path  do |f| %>
+  <div class="col-md-4 col-md-offset-1">
+    <div>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="order">
+          <br><br>
+          <dl class="dl-horizontal">
+            <dt><%= f.label :inquiry_date %></dt>
+            <dd><%= @order.datetime %></dd>
+            <br>
+            <dt><%= f.label :no %></dt>
+            <dd><%= @order.no %></dd>
+            <br>
+            <dt><%= f.label :shipper  %></dt>
+            <dd><%= @order.shipper %></dd>
+            <br>
+            <dt><%= f.label :shipper_address  %></dt>
+            <dd><%= @order.shipper_address %></dd>
+            <br>
+            <dt><%= f.label :transporter %></dt>
+            <dd><%= @order.transporter %></dd>
+            <br>
+            <dt><%= f.label :truck_size %></dt>
+            <dd><%= @order.truck_size %></dd>
+            <br>
+            <dt><%= f.label :route %></dt>
+            <dd><%= @order.remarks %></dd>
+            <br>
+            <%if current_user.email != "mu@ikargo.com" %>
+            <dt><%= f.label(:payment, "Rate") %></dt>
+            <dd><%= @order.payment_with_gst %></dd>
+            <%end%>
+            <br>
+            <dt><%= f.label :notes%></dt>
+            <dd><%= @order.notes %></dd>
+            <br>
+          </dl>
+        </ul>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="personal_info">
+        <br><br>
+        <dl class="dl-horizontal">
+          <dt><%= f.label :pick_up_address_1 %></dt>
+          <dd><%= @order.pick_up_address_1 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_pic_no_1 %></dt>
+          <dd><%= @order.pick_up_pic_no_1 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_address_2 %></dt>
+          <dd><%= @order.pick_up_address_2 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_pic_no_2 %></dt>
+          <dd><%= @order.pick_up_pic_no_2 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_address_3 %></dt>
+          <dd><%= @order.pick_up_address_3 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_pic_no_3 %></dt>
+          <dd><%= @order.pick_up_pic_no_3 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_address_4 %></dt>
+          <dd><%= @order.pick_up_address_4 %></dd>
+          <br>
+          <dt><%= f.label :pick_up_pic_no_4 %></dt>
+          <dd><%= @order.pick_up_pic_no_4 %></dd>
+          <br>
+          <dt><%= f.label :goods_description %></dt>
+          <dd><%= @order.goods_description %></dd>
+          <br>
+          <dt><%= f.label :datetime  %></dt>
+          <dd><%= @order.datetime %></dd>
+          <br>
+          <dt><%= f.label :special_request %></dt>
+          <dd><%= @order.special_request %></dd>
+        </dl>
+      </ul>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="employment_info">
+      <dl class="dl-horizontal">
+        <br><br>
+        <dt><%= f.label :drop_point_date %></dt>
+        <dd><%= @order.drop_point_date %></dd>
+        <br>
+        <dt><%= f.label :drop_point_address_1 %></dt>
+        <dd><%= @order.drop_point_address_1 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_pic_no_1 %></dt>
+        <dd><%= @order.drop_point_pic_no_1 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_address_2 %></dt>
+        <dd><%= @order.drop_point_address_2 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_pic_no_2 %></dt>
+        <dd><%= @order.drop_point_pic_no_2 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_address_3 %></dt>
+        <dd><%= @order.drop_point_address_3 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_pic_no_3 %></dt>
+        <dd><%= @order.drop_point_pic_no_3 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_address_4 %></dt>
+        <dd><%= @order.drop_point_address_4 %></dd>
+        <br>
+        <dt><%= f.label :drop_point_pic_no_4 %></dt>
+        <dd><%= @order.drop_point_pic_no_4 %></dd>
+        <br>
+        <dt><%= f.label :special_request %></dt>
+        <dd><%= @order.special_request %></dd>
+        <br>
+      </dl>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="others_info">
+      <dl class="dl-horizontal">
+        <br><br>
+        <dt><%= f.label :trucks_capacity %></dt>
+        <dd><%= @order.trucks_capacity %></dd>
+        <br>
+        <dt><%= f.label :truck_reg_no %></dt>
+        <dd><%= @order.truck_reg_no %></dd>
+        <br>
+        <dt><%= f.label :name %></dt>
+        <dd><%= @order.name %></dd>
+        <br>
+        <dt><%= f.label :ic %></dt>
+        <dd><%= @order.ic %></dd>
+        <br>
+        <dt><%= f.label :phone_no %></dt>
+        <dd><%= @order.phone_no %></dd>
+        <br>
+        <dt><%= f.label :driver_remarks %></dt>
+        <dd><%= @order.driver_remarks %></dd>
+      </dl>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="system_info">
+      <dl class="dl-horizontal">
+        <br><br>
+        <dt><%= f.label :delivery_date %></dt>
+        <dd><%= @order.delivery_date %></dd>
+        <br>
+
+        <dt><%= f.label :do_request_date %></dt>
+        <dd><%= @order.do_request_date %></dd>
+        <br>
+
+        <dt><%= f.label :do_collection_date %></dt>
+        <dd><%= @order.do_collection_date %></dd>
+        <br>
+
+        <dt><%= f.label :do_number %></dt>
+        <dd><%= @order.do_number %></dd>
+        <br>
+
+        <dt><%= f.label :total_tonne %></dt>
+        <dd><%= @order.total_tonne %></dd>
+         <br>
+
+        <dt><%= f.label :deliveredy_status %></dt>
+        <dd><%= @order.delivered %></dd>
+        <br>
+      </dl>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="payment_info">
+      <dl class="dl-horizontal">
+        <br><br>
+        <dt><%= f.label :payment_name %></dt>
+        <dd><%= @order.payment_name %></dd>
+        <br>
+        <dt><%= f.label :tel_no %></dt>
+        <dd><%= @order.tel_no %></dd>
+        <br>
+        <dt><%= f.label :account_no %></dt>
+        <dd><%= @order.account_no %></dd>
+        <br>
+        <dt><%= f.label :rate %></dt>
+        <dd><%= @order.rate %></dd>
+        <br>
+        <dt><%= f.label :payment_rate %></dt>
+        <dd><%= @order.payment_rate %></dd>
+        <br>
+        <dt><%= f.label(:gst_total_value, "6% GST")%></dt>
+        <dd>  <%= @order.gst_total_value %>
+        </dd>
+        <br>
+        <dt><%= f.label(:gst_total_value, "Total After GST") %></dt>
+        <dd><%= @order.payment_with_gst %></dd>
+        <br>
+        <dt><%= f.label :advance %></dt>
+        <dd><%= @order.payment_advance %></dd>
+        <br>
+        <dt><%= f.label :commision %></dt>
+        <dd><%= @order.payment_commision %></dd>
+        <br>
+        <dt><%= f.label :paid %></dt>
+        <dd><%= @order.payment_paid %></dd>
+        <br>
+        <dt><%= f.label :balance %></dt>
+        <dd><%= @order.payment_balance %></dd>
+
+      </dl>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="billing_info">
+      <dl class="dl-horizontal">
+        <br><br>
+        <dt><%= f.label :name %></dt>
+        <dd><%= @order.billing_name %></dd>
+        <br>
+<dt><%= f.label(:billing_rate, "rate") %></dt>
+        <dd><%= @order.billing_rate%></dd>
+        <br>
+        <dt><%= f.label :amount %></dt>
+        <dd><%= @order.billing_amount%></dd>
+        <br>
+        <dt><%= f.label(:gst_billing_total_value, "6% GST" )%></dt>
+        <dd id="billing_gst"><%= @order.gst_billing_total_value%></dd>
+        <br>
+
+<dt><%= f.label(:billing_with_gst, "MASTER TOTAL") %></dt>
+        <dd><%= @order.billing_with_gst%></dd>
+        <br>
+
+
+        <dt><%= f.label :billing_received %></dt>
+        <dd><%= @order.billing_received%></dd>
+        <br>
+
+        <dt><%= f.label :billing_balance %></dt>
+        <dd><%= @order.billing_balance%></dd>
+        <br>
+
+        <dt><%= f.label :invoice_date %></dt>
+        <dd><%= @order.invoice_date  %></dd>
+        <br>
+        <dt><%= f.label :invoice %></dt>
+        <dd><%= @order.invoice %></dd>
+        <br>
+
+      </dl>
+    </div>
+    <dd><%= link_to "Edit", edit_order_path, class: "btn btn-primary", style: "margin-right:10px;", :"data-no-turbolink" => true %>
+      
+      <%= link_to "Back" , dashboard_path, class: "btn btn-primary", :"data-no-turbolink" => true %>
+
+      <%= link_to 'Destroy', @order, method: :delete, data: { confirm: 'Are you sure?' }, style: "margin-right:10px;", style: "margin-right:10px;margin-left: 500px;" %>
+    </dd>
+  </dl>
+</div>
+</div>
+</div>
+</div>
+<%end%>
+</div>
+
